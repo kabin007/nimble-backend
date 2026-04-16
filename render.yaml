@@ -4,6 +4,7 @@ services:
 - type: web
   name: nimble-backend
   runtime: python
+  pythonVersion: 3.11
   repo: https://github.com/kabin007/nimble-backend
   plan: free
   envVars:
