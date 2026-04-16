@@ -102,6 +102,7 @@ REST_FRAMEWORK = {
 }
 
 # CORS Configuration
+# CORS Configuration
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
 else:
@@ -110,6 +111,16 @@ else:
         "CORS_ALLOWED_ORIGINS",
         default="https://nimble-frontend-2.onrender.com",
     ).split(",")
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "origin",
+    "x-csrf-token",
+    "x-requested-with",
+]
 
 # JWT Configuration
 JWT_SECRET = config("JWT_SECRET", default="your-jwt-secret-key-change-in-production")
