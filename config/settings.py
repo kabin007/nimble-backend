@@ -101,8 +101,15 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 100,
 }
 
-# CORS Configuration (frontend on port 8080, API on port 3000)
-# Run backend with: python manage.py runserver 0.0.0.0:3000
+# CORS Configuration
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+else:
+    CORS_ALLOW_ALL_ORIGINS = False
+    CORS_ALLOWED_ORIGINS = config(
+        "CORS_ALLOWED_ORIGINS",
+        default="https://nimble-frontend-2.onrender.com",
+    ).split(",")
 
 # JWT Configuration
 JWT_SECRET = config("JWT_SECRET", default="your-jwt-secret-key-change-in-production")
