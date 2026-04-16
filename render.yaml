@@ -1,12 +1,26 @@
+# Exported from Render on 2026-04-16T09:53:38Z
+version: "1"
 services:
-  - type: web
-    name: NimbleGarment-Backend
-    runtime: python
-    pythonVersion: 3.11
-    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
-    buildCommand: pip install -r requirements.txt && python manage.py migrate
-    envs:
-      - key: PYTHON_VERSION
-        value: 3.11
-      - key: DEBUG
-        value: "False"
+- type: web
+  name: nimble-backend
+  runtime: python
+  repo: https://github.com/kabin007/nimble-backend
+  plan: free
+  envVars:
+  - key: JWT_SECRET
+    sync: false
+  - key: DATABASE_URL
+    sync: false
+  - key: CSRF_TRUSTED_ORIGINS
+    sync: false
+  - key: ALLOWED_HOSTS
+    sync: false
+  - key: SECRET_KEY
+    sync: false
+  - key: DEBUG
+    sync: false
+  region: oregon
+  buildCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
+  startCommand: pip install -r requirements.txt && python manage.py migrate
+  autoDeployTrigger: commit
+  rootDir: ./
