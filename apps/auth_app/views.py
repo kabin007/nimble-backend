@@ -9,7 +9,14 @@ from .models import UserProfile
 
 
 class AuthViewSet(viewsets.ViewSet):
-    permission_classes = [AllowAny]
+    
+    def get_permissions(self):
+        """Set permissions based on action"""
+        if self.action in ["login", "register"]:
+            return [AllowAny()]
+        elif self.action == "me":
+            return [IsAuthenticated()]
+        return [AllowAny()]
 
     @action(detail=False, methods=["post"])
     def login(self, request):
@@ -48,7 +55,7 @@ class AuthViewSet(viewsets.ViewSet):
             status=status.HTTP_201_CREATED,
         )
 
-    @action(detail=False, methods=["get"], permission_classes=[IsAuthenticated])
+    @action(detail=False, methods=["get"])
     def me(self, request):
         """Get current user"""
         user_data = UserSerializer(request.user).data

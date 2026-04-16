@@ -95,13 +95,12 @@ REST_FRAMEWORK = {
         "apps.auth_app.authentication.JWTAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.AllowAny",
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 100,
 }
 
-# CORS Configuration
 # CORS Configuration
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
@@ -120,6 +119,15 @@ CORS_ALLOW_HEADERS = [
     "origin",
     "x-csrf-token",
     "x-requested-with",
+]
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
 ]
 
 # JWT Configuration
