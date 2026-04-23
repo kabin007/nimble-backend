@@ -105,10 +105,10 @@ REST_FRAMEWORK = {
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
 else:
-    CORS_ALLOW_ALL_ORIGINS = False
+    CORS_ALLOW_ALL_ORIGINS = True
     CORS_ALLOWED_ORIGINS = config(
         "CORS_ALLOWED_ORIGINS",
-        default="https://nimble-frontend-2.onrender.com",
+        default="https://nimble-frontend-2.onrender.com,http://localhost:8080,http://127.0.0.1:8080",
     ).split(",")
 
 CORS_ALLOW_HEADERS = [

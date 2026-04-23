@@ -1,10 +1,11 @@
 from django.db import models
 from apps.core.models import BaseModel
 from apps.transaction.models import Transaction
+from apps.dealer.models import Dealer
 
 
 class Bill(BaseModel):
-    vendor_id = models.CharField(max_length=255)
+    vendor = models.ForeignKey(Dealer, on_delete=models.PROTECT, related_name="bills", blank=True, null=True)
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     description = models.TextField(blank=True, null=True)
     bill_image = models.URLField(blank=True, null=True)

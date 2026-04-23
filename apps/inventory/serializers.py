@@ -41,6 +41,9 @@ class InventorySerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # validated_data will have 'item_name', 'unit_price', 'min_stock' keys
         # Status defaults to 'active' in the model
+        if not validated_data.get("sku"):
+            import uuid
+            validated_data["sku"] = str(uuid.uuid4())[:12]
         return Inventory.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
